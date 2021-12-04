@@ -5,6 +5,8 @@ import fs from "fs";
 import path from "path";
 import chalk from "chalk";
 
+const ignoredDirs = ["node_modules", ".git"];
+
 export class Runner {
   constructor() {
     this.testFiles = [];
@@ -50,7 +52,7 @@ export class Runner {
 
       if (stats.isFile() && file.includes(".test.js")) {
         this.testFiles.push({ name: filePath, shortName: file });
-      } else if (stats.isDirectory()) {
+      } else if (stats.isDirectory() && !ignoredDirs.includes(file)) {
         const childFiles = await fs.promises.readdir(filePath);
 
         files.push(...childFiles.map((f) => path.join(file, f)));
