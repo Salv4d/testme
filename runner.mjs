@@ -1,13 +1,18 @@
-const fs = require("fs");
-const path = require("path");
+// const fs = require("fs");
+// const path = require("path");
 
-class Runner {
+import fs from "fs";
+import path from "path";
+import chalk from "chalk";
+
+export class Runner {
   constructor() {
     this.testFiles = [];
   }
 
   async runTests() {
     for (let file of this.testFiles) {
+      console.log(chalk.gray(`___________ ${file.name}`));
       const beforeEaches = [];
 
       globalThis.beforeEach = (fn) => {
@@ -19,18 +24,19 @@ class Runner {
 
         try {
           fn();
-          console.log(`Passed - ${desc}`);
+          console.log(chalk.green(`Passed - ${desc}`));
         } catch (err) {
-          console.log(`Failed - ${desc}`);
-          console.log(`\t >>>> ${err.message}`);
+          console.log(chalk.red(`Failed - ${desc}`));
+          console.log(chalk.red(`\t >>>> ${err.message}`));
         }
       };
 
       try {
-        require(file.name);
+        import(file.name);
+        // require(file.name);
       } catch (err) {
-        console.log(`Failed - Error loading file ${file.name}`);
-        console.log(`\t >>>> ${err.message}`);
+        console.log(chalk.red(`Failed - Error loading file ${file.name}`));
+        console.log(`\t >>>> ${err}`);
       }
     }
   }
@@ -53,4 +59,4 @@ class Runner {
   }
 }
 
-module.exports = Runner;
+// module.exports = Runner;

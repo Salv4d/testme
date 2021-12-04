@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "testme",
   "version": "1.0.0",
   "description": "A testing framework build for study purposes",
@@ -11,5 +12,8 @@
   "license": "ISC",
   "bin": {
     "testme": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0"
   }
 }

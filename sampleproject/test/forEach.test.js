@@ -1,5 +1,8 @@
-const assert = require("assert");
-const { forEach } = require("../index");
+// const assert = require("assert");
+// const { forEach } = require("../index");
+
+import assert from "assert";
+import { forEach } from "../index.mjs";
 
 let numbers;
 beforeEach(() => {
