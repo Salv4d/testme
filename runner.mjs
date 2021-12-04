@@ -12,7 +12,7 @@ export class Runner {
 
   async runTests() {
     for (let file of this.testFiles) {
-      console.log(chalk.gray(`___________ ${file.name}`));
+      console.log(chalk.gray(`___________ ${file.shortName}`));
       const beforeEaches = [];
 
       globalThis.beforeEach = (fn) => {
@@ -33,7 +33,6 @@ export class Runner {
 
       try {
         import(file.name);
-        // require(file.name);
       } catch (err) {
         console.log(chalk.red(`Failed - Error loading file ${file.name}`));
         console.log(`\t >>>> ${err}`);
@@ -49,7 +48,7 @@ export class Runner {
       const stats = await fs.promises.lstat(filePath);
 
       if (stats.isFile() && file.includes(".test.js")) {
-        this.testFiles.push({ name: filePath });
+        this.testFiles.push({ name: filePath, shortName: file });
       } else if (stats.isDirectory()) {
         const childFiles = await fs.promises.readdir(filePath);
 
