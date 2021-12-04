@@ -16,10 +16,22 @@ class Runner {
 
       globalThis.it = (desc, fn) => {
         beforeEaches.forEach((func) => func());
-        fn();
+
+        try {
+          fn();
+          console.log(`Passed - ${desc}`);
+        } catch (err) {
+          console.log(`Failed - ${desc}`);
+          console.log(`\t >>>> ${err.message}`);
+        }
       };
 
-      require(file.name);
+      try {
+        require(file.name);
+      } catch (err) {
+        console.log(`Failed - Error loading file ${file.name}`);
+        console.log(`\t >>>> ${err.message}`);
+      }
     }
   }
 
