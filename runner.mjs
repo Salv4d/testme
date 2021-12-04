@@ -24,10 +24,11 @@ export class Runner {
 
         try {
           fn();
-          console.log(chalk.green(`Passed - ${desc}`));
+          console.log(chalk.green(`\t✓ Passed - ${desc}`));
         } catch (err) {
-          console.log(chalk.red(`Failed - ${desc}`));
-          console.log(chalk.red(`\t >>>> ${err.message}`));
+          const message = err.message.replace(/\n/g, "\n\t\t");
+          console.log(chalk.red(`\t✗ Failed - ${desc}`));
+          console.log(chalk.red(`\t >>>> ${message}`));
         }
       };
 
