@@ -4,7 +4,7 @@
 import fs from "fs";
 import path from "path";
 import chalk from "chalk";
-import { render } from "./render";
+const { render } = await import("./render.js");
 
 const ignoredDirs = ["node_modules", ".git"];
 
