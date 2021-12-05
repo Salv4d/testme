@@ -23,11 +23,11 @@ export class Runner {
         beforeEaches.push(fn);
       };
 
-      globalThis.it = (desc, fn) => {
+      globalThis.it = async (desc, fn) => {
         beforeEaches.forEach((func) => func());
 
         try {
-          fn();
+          await fn();
           console.log(chalk.green(`\t✓ Passed - ${desc}`));
         } catch (err) {
           const message = err.message.replace(/\n/g, "\n\t\t");
