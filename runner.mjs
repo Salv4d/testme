@@ -4,6 +4,7 @@
 import fs from "fs";
 import path from "path";
 import chalk from "chalk";
+import { render } from "./render";
 
 const ignoredDirs = ["node_modules", ".git"];
 
@@ -17,6 +18,7 @@ export class Runner {
       console.log(chalk.gray(`___________ ${file.shortName}`));
       const beforeEaches = [];
 
+      globalThis.render = render;
       globalThis.beforeEach = (fn) => {
         beforeEaches.push(fn);
       };
